@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+  
+<div class="container mt-5">
+        <table class="table table-borderless table-responsive card-1 p-4">
+<thead>
+
+<tr class="border-bottom">
+    <th>
+        <span>No.</span>
+    </th>
+    <th>
+        <span class="ml-2">Username</span>
+    </th>
+  <th>
+      <span class="ml-2">Course</span>
+  </th>
+  
+  
+  <th>
+      <span class="ml-2">Email</span>
+  </th>
+  <th>
+      <span class="ml-2">Number</span>
+  </th>
+  <th>
+      <span class="ml-4">Image</span>
+  </th>
+</tr>
+</thead>
+<tbody>
+  {% for student in data %}
+<tr class="border-bottom">
+    <td>
+       {{student.id}}
+    </td>
+  <td>
+    <div class="p-2">
+        <span class="d-block font-weight-bold">{{student.name}}</span>
+        <small></small>
+    </div>
+  </td>
+  <td>
+    <div class="p-2">
+        <span class="font-weight-bold">{{student.course}}</span>
+    </div>
+    
+  </td>
+  <td>
+    <div class="p-2 d-flex flex-column">
+        <span>{{student.email}}</span>
+    </div>
+  </td>
+  <td>
+      <div class="p-2 d-flex flex-column">
+          <span>{{student.number}}</span>
+      </div>
+  </td>
+  <td>
+    <div class="p-2 d-flex flex-row align-items-center mb-2">
+        <img src="/media/{{student.image}}" width="30" class="rounded-circle">
+        <div class="d-flex flex-column ml-2">
+            <span class="d-block font-weight-bold"></span>
+            <small class="text-muted"></small>
+        </div>
+  </td>
+</div>
+<td>
+  <div class="p-2 icons">
+      <i class="fa fa-phone text-danger">
+          <a href="#" class="btn btn-danger delete-btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="{{ student.id }}">Delete</a>
+      </i>
+      <i class="fa fa-adjust text-danger">
+          <a href="" class="btn btn-warning">Edit</a>
+      </i>
+      <i class="fa fa-share"></i>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Are You sure You want to Delete?</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  This record will be permanently deleted!
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a href="#" class="btn btn-danger" id="confirmDeleteBtn">Delete</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</td>
+</tr>
+
+<div class="row">
+</div>
+
+{% endfor %}
+</tbody>
+</table>
+ </div>
+
+
+ {% endblock  %}
+
+ {% block script %}
+ <script>
+  document.addEventListener('DOMContentLoaded', function () {
+      var deleteBtns = document.querySelectorAll('.delete-btn');
+      var confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+      deleteBtns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+              var dataId = btn.getAttribute('data-id');
+              confirmDeleteBtn.setAttribute('href', '/delete/' + dataId);
+          });
+      });
+  });
+</script>
+ 
+  {% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container cont">
+<div class="container">
+<div class="wrapper">
+    {% comment %} in action, we put the path that calls on the function {% endcomment %}
+    <form action="/insert" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div id="wizard">
+            <h4>Add Data</h4>
+            <section>
+                <div class="form-row"> <input type="text" class="form-control" placeholder="Username" name="name"> </div><br>
+                <div class="form-row"> <input type="text" class="form-control" placeholder="Course" name="course"> </div><br>
+                <div class="form-row"> <input type="email" class="form-control" placeholder="Email" name="email"> </div><br>
+                <div class="form-row"> <input type="number" class="form-control" placeholder="Phone number" name="number"> </div>
+                <label>Profile Pic:
+                    <div class="form-row"> <input name="image" accept="image/png, image/gif, image/jpeg" type="file" class="form-control" placeholder="Image"> </div><br>
+                </label>
+                <div class="form-row"> <button type="submit" class="btn btn-info">Add Data</button> </div>
+            </section>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+  {% endblock  %}
+
+  {% block script %}
+    
+  {% endblock %}
